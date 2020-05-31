@@ -1,27 +1,54 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
+using System.Diagnostics;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x804 上介绍了“空白页”项模板
+using muxc = Microsoft.UI.Xaml.Controls;
+using pages = XboxDesktopLauncher.Pages;
 
 namespace XboxDesktopLauncher {
-    /// <summary>
-    /// 可用于自身或导航至 Frame 内部的空白页。
-    /// </summary>
+
+    internal class Parameter {
+
+        public string Tag { get; set; }
+
+        public Parameter(string tag) {
+            Tag = tag;
+        }
+    }
+
     public sealed partial class MainPage : Page {
+
+        private readonly Dictionary<string, Type> routes = new Dictionary<string, Type> {
+            {"home" , typeof(pages.HomePage) },
+            {"games" , typeof(pages.GamesPage) }
+        };
+
+        private Type DefaultRoute { get { return routes["home"]; } }
+
+        private string Current { get; set; }
+
         public MainPage() {
-            this.InitializeComponent();
+            InitializeComponent();
+            ContentFrame.Navigated += OnNavigated;
+        }
+
+        public void NavigationBarItemInvoked(muxc.NavigationView _, muxc.NavigationViewItemInvokedEventArgs args) {
+            var tag = args.InvokedItemContainer?.Tag.ToString();
+            var current = (muxc.NavigationViewItem)NavigationBar.SelectedItem;
+            if (Current == current.Tag.ToString()) return;
+            ContentFrame.NavigateToType(UsePage(tag), new Parameter(tag), new FrameNavigationOptions {
+                TransitionInfoOverride = args.RecommendedNavigationTransitionInfo
+            });
+        }
+
+        private Type UsePage(string tag) {
+            return routes[tag ?? "default"] ?? DefaultRoute;
+        }
+
+        private void OnNavigated(object sender, NavigationEventArgs args) {
+            Current = ((Parameter)args.Parameter)?.Tag;
         }
     }
 }
