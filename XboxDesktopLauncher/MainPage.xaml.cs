@@ -21,24 +21,24 @@ namespace XboxDesktopLauncher {
 
     public sealed partial class MainPage : Page {
 
-        private string Current { get; set; }
+        private string CurrentTag { get; set; }
 
         public MainPage() {
             InitializeComponent();
-            ContentFrame.Navigated += OnNavigated;
+            ContentFrame.Navigated += OnContentFrameNavigated;
         }
 
         public void NavigationBarItemInvoked(muxc.NavigationView _, muxc.NavigationViewItemInvokedEventArgs args) {
             var tag = args.InvokedItemContainer?.Tag.ToString();
             var current = (muxc.NavigationViewItem)NavigationBar.SelectedItem;
-            if (Current == current.Tag.ToString()) return;
+            if (CurrentTag == current.Tag.ToString()) return;
             ContentFrame.NavigateToType(ApplicationRouter.GetRoute(tag), new Parameter(tag), new FrameNavigationOptions {
                 TransitionInfoOverride = args.RecommendedNavigationTransitionInfo
             });
         }
 
-        private void OnNavigated(object sender, NavigationEventArgs args) {
-            Current = ((Nullable<Parameter>)args.Parameter)?.Tag;
+        private void OnContentFrameNavigated(object sender, NavigationEventArgs args) {
+            CurrentTag = ((Nullable<Parameter>)args.Parameter)?.Tag;
         }
     }
 }
