@@ -70,7 +70,11 @@ namespace XboxDesktopLauncher {
         }
 
         private Color GetThemeColor(string name) {
-            return ((SolidColorBrush)Resources["System" + name + "Brush"]).Color;
+            return ((Color)Resources["System" + name + "Color"]);
+        }
+
+        private Color GetThemeColor(string name, string level) {
+            return ((Color)Resources["System" + name + "Color" + level]);
         }
 
         private void UseCustomNavigationTitleBar() {
@@ -82,9 +86,9 @@ namespace XboxDesktopLauncher {
             titleBar.ButtonForegroundColor = Colors.White;
             titleBar.ButtonBackgroundColor = Colors.Transparent;
             titleBar.ButtonHoverForegroundColor = Colors.White;
-            titleBar.ButtonHoverBackgroundColor = Colors.Transparent;
-            titleBar.ButtonPressedForegroundColor = Colors.Gray;
-            titleBar.ButtonPressedBackgroundColor = Colors.Transparent;
+            titleBar.ButtonHoverBackgroundColor = GetThemeColor("Accent");
+            titleBar.ButtonPressedForegroundColor = Colors.White;
+            titleBar.ButtonPressedBackgroundColor = GetThemeColor("Accent", "Dark2");
 
             // Set inactive window colors
             titleBar.InactiveForegroundColor = Colors.Gray;
