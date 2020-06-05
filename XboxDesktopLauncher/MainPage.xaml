@@ -8,7 +8,7 @@
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    <Grid Padding="24">
+    <Grid>
         <muxc:NavigationView
             x:Name="NavigationBar"
             PaneDisplayMode="Top" 
@@ -20,7 +20,7 @@
                 <muxc:NavigationViewItem Icon="Home" Content="Home" Tag="home"/>
                 <muxc:NavigationViewItem Icon="Play" Content="Games" Tag="games"/>
             </muxc:NavigationView.MenuItems>
-            <Grid>
+            <Grid Padding="24">
                 <Frame x:Name="ContentFrame"/>
             </Grid>
         </muxc:NavigationView>
