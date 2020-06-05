@@ -38,7 +38,7 @@ namespace XboxDesktopLauncher {
         }
 
         private void OnContentFrameNavigated(object sender, NavigationEventArgs args) {
-            CurrentTag = ((Nullable<Parameter>)args.Parameter)?.Tag;
+            CurrentTag = ((Parameter?)args.Parameter)?.Tag;
         }
     }
 }
