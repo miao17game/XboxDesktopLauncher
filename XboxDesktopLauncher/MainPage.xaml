@@ -11,7 +11,7 @@
 
     <Components:PivotContainer>
         <Components:PivotContainer.ContentFrame>
-            <Frame x:Name="content" />
+            <Frame x:Name="content" Navigated="OnNavigated"/>
         </Components:PivotContainer.ContentFrame>
     </Components:PivotContainer>
 </Page>

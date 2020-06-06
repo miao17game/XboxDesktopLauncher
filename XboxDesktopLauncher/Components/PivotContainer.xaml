@@ -5,24 +5,56 @@
     xmlns:local="using:XboxDesktopLauncher.Components"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     mc:Ignorable="d"
-    d:DesignHeight="200"
-    d:DesignWidth="500">
+    d:DesignHeight="400"
+    d:DesignWidth="600">
 
-    <muxc:NavigationView
-            x:Name="navbar"
-            PaneDisplayMode="Top" 
-            SelectionFollowsFocus="Enabled"
-            IsBackButtonVisible="Collapsed"
-            IsSettingsVisible="False"
-            ItemInvoked="ItemInvoke">
-        <muxc:NavigationView.MenuItems>
-            <muxc:NavigationViewItem Icon="Home" Content="Home" Tag="home"/>
-            <muxc:NavigationViewItem Icon="Play" Content="Games" Tag="games"/>
-        </muxc:NavigationView.MenuItems>
-        <Grid Padding="24">
+    <UserControl.Resources>
+        <Style x:Key="ContainerStyle" TargetType="Grid">
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="Background" Value="{StaticResource BlackCatBackgroundBrush}" />
+        </Style>
+        <Style x:Key="ItemsStyle" TargetType="ListView">
+            <Setter Property="Padding" Value="0,40,0,0" />
+            <Setter Property="Height" Value="120" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FlowDirection" Value="LeftToRight" />
+            <Setter Property="Background" Value="{ThemeResource SystemControlBaseHighAcrylicElementMediumBrush}" />
+        </Style>
+        <Style x:Key="ItemStyle" TargetType="TextBlock">
+            <Setter Property="Width" Value="120" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="TextAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+    </UserControl.Resources>
+
+    <Grid Style="{StaticResource ContainerStyle}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="120"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <ListView 
+            Grid.Row="0"
+            Style="{StaticResource ItemsStyle}"
+            ItemsSource="{x:Bind Tags}"
+            SelectedItem="{x:Bind Selected}"
+            SelectionMode="Single"
+            SelectionChanged="ListView_SelectionChanged">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <ItemsStackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="local:Tag">
+                    <TextBlock Style="{StaticResource ItemStyle}" Text="{x:Bind Value}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Grid Grid.Row="1">
             <ContentPresenter Content="{x:Bind ContentFrame}" />
         </Grid>
-    </muxc:NavigationView>
+    </Grid>
+
 </UserControl>

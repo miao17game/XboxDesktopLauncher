@@ -9,5 +9,7 @@ namespace XboxDesktopLauncher {
         public MainPage() {
             InitializeComponent();
         }
+
+        public void OnNavigated(object _, NavigationEventArgs args) { }
     }
 }
