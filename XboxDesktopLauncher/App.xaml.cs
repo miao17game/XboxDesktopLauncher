@@ -4,9 +4,7 @@ using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-
-using Colors = Windows.UI.Colors;
-using TitleHelper = XboxDesktopLauncher.Utils.TitleBarHelper;
+using XboxDesktopLauncher.Utils;
 
 namespace XboxDesktopLauncher {
 
@@ -54,23 +52,7 @@ namespace XboxDesktopLauncher {
         }
 
         private void UseCustomNavigationTitleBar() {
-            var titleBar = TitleHelper.UseExtendTitleBar();
-
-            // Set active window colors
-            titleBar.ForegroundColor = Colors.White;
-            titleBar.BackgroundColor = Colors.Transparent;
-            titleBar.ButtonForegroundColor = Colors.White;
-            titleBar.ButtonBackgroundColor = Colors.Transparent;
-            titleBar.ButtonHoverForegroundColor = Colors.White;
-            titleBar.ButtonHoverBackgroundColor = TitleHelper.GetThemeColor("Accent");
-            titleBar.ButtonPressedForegroundColor = Colors.White;
-            titleBar.ButtonPressedBackgroundColor = TitleHelper.GetThemeColor("Accent", "Dark2");
-
-            // Set inactive window colors
-            titleBar.InactiveForegroundColor = Colors.Gray;
-            titleBar.InactiveBackgroundColor = Colors.Transparent;
-            titleBar.ButtonInactiveForegroundColor = Colors.Gray;
-            titleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
+            TitleBarHelper.UseExtendTitleBar();
         }
     }
 
