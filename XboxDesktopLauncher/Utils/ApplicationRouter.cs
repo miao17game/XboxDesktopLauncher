@@ -52,6 +52,14 @@ namespace XboxDesktopLauncher.Utils {
 
         public static Type DefaultRoute { get { return tags[RouteType.Home].Page; } }
 
+        public static RouteData GetRouteData(RouteType type) {
+            return tags[type];
+        }
+
+        public static RouteTag GetRouteTag(RouteType type) {
+            return Tags.First(i => i.Type == type);
+        }
+
         public static bool NavigateTo(Frame frame, RouteType tag, NavigationTransitionInfo transition) {
             return InnerNavigateTo(frame, tag, transition);
         }
