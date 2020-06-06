@@ -18,41 +18,11 @@ using XboxDesktopLauncher.Utils;
 
 namespace XboxDesktopLauncher.Components {
 
-    public class Tag {
-        public readonly string Text;
-
-        public readonly string Value;
-
-        public readonly int Index;
-
-        public Tag(string display, string tag, int index) {
-            Text = display;
-            Value = tag;
-            Index = index;
-        }
-    }
-
-    static class TransitionHelper {
-        public readonly static SlideNavigationTransitionInfo Next = new SlideNavigationTransitionInfo {
-            Effect = SlideNavigationTransitionEffect.FromRight
-        };
-
-        public readonly static SlideNavigationTransitionInfo Previous = new SlideNavigationTransitionInfo {
-            Effect = SlideNavigationTransitionEffect.FromLeft
-        };
-
-        public static SlideNavigationTransitionInfo DecideAnimas(Tag pre, Tag current) {
-            return pre.Index > current.Index ? Previous : Next;
-        }
-    }
-
-
-
     public sealed partial class PivotContainer : UserControl {
 
-        public List<Tag> Tags = new List<Tag> { new Tag("Home", "home", 1), new Tag("Games", "games", 2) };
+        public IList<RouteTag> Tags { get { return ApplicationRouter.Tags; } }
 
-        public Tag Selected;
+        public RouteTag Selected;
 
         public Frame ContentFrame {
             get { return (Frame)GetValue(ContentFrameProperty); }
@@ -62,7 +32,7 @@ namespace XboxDesktopLauncher.Components {
                 }
                 SetValue(ContentFrameProperty, value);
                 value.Navigated += OnNavigated;
-                value.NavigateToRoute(Selected.Value, TransitionHelper.Next);
+                value.NavigateToRoute(Selected.Type, null);
             }
         }
 
@@ -78,8 +48,8 @@ namespace XboxDesktopLauncher.Components {
 
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             var pre = Selected;
-            Selected = (Tag)e.AddedItems[0];
-            ContentFrame.NavigateToRoute(Selected.Value, TransitionHelper.DecideAnimas(pre, Selected));
+            Selected = (RouteTag)e.AddedItems[0];
+            ContentFrame.NavigateToRoute(Selected.Type, TransitionHelper.DecideSlideAnimation(pre, Selected));
         }
     }
 }
