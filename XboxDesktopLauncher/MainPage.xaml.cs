@@ -10,18 +10,7 @@ using muxc = Microsoft.UI.Xaml.Controls;
 
 namespace XboxDesktopLauncher {
 
-    internal struct Parameter {
-
-        public readonly string Tag;
-
-        public Parameter(string tag) {
-            Tag = tag;
-        }
-    }
-
     public sealed partial class MainPage : Page {
-
-        private string CurrentTag { get; set; }
 
         public MainPage() {
             InitializeComponent();
@@ -29,16 +18,10 @@ namespace XboxDesktopLauncher {
         }
 
         public void NavigationBarItemInvoked(muxc.NavigationView _, muxc.NavigationViewItemInvokedEventArgs args) {
-            var tag = args.InvokedItemContainer?.Tag.ToString();
-            var current = (muxc.NavigationViewItem)NavigationBar.SelectedItem;
-            if (CurrentTag == current.Tag.ToString()) return;
-            ContentFrame.NavigateToType(ApplicationRouter.GetRoute(tag), new Parameter(tag), new FrameNavigationOptions {
-                TransitionInfoOverride = args.RecommendedNavigationTransitionInfo
-            });
+            ContentFrame.NavigateToRoute(args.InvokedItemContainer?.Tag.ToString(), args.RecommendedNavigationTransitionInfo);
         }
 
-        private void OnContentFrameNavigated(object sender, NavigationEventArgs args) {
-            CurrentTag = ((Parameter?)args.Parameter)?.Tag;
-        }
+        private void OnContentFrameNavigated(object sender, NavigationEventArgs args) { }
     }
+
 }

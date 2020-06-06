@@ -1,24 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
-using Windows.ApplicationModel.Core;
 using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using Windows.UI.ViewManagement;
 
 using Colors = Windows.UI.Colors;
-using Color = Windows.UI.Color;
+using TitleHelper = XboxDesktopLauncher.Utils.TitleBarHelper;
 
 namespace XboxDesktopLauncher {
 
@@ -65,30 +53,18 @@ namespace XboxDesktopLauncher {
             deferral.Complete();
         }
 
-        private Color GetBrushColor(string name) {
-            return ((SolidColorBrush)Resources["System" + name + "Brush"]).Color;
-        }
-
-        private Color GetThemeColor(string name) {
-            return ((Color)Resources["System" + name + "Color"]);
-        }
-
-        private Color GetThemeColor(string name, string level) {
-            return ((Color)Resources["System" + name + "Color" + level]);
-        }
-
         private void UseCustomNavigationTitleBar() {
-            CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = true;
-            var titleBar = ApplicationView.GetForCurrentView().TitleBar;
+            var titleBar = TitleHelper.UseExtendTitleBar();
+
             // Set active window colors
             titleBar.ForegroundColor = Colors.White;
             titleBar.BackgroundColor = Colors.Transparent;
             titleBar.ButtonForegroundColor = Colors.White;
             titleBar.ButtonBackgroundColor = Colors.Transparent;
             titleBar.ButtonHoverForegroundColor = Colors.White;
-            titleBar.ButtonHoverBackgroundColor = GetThemeColor("Accent");
+            titleBar.ButtonHoverBackgroundColor = TitleHelper.GetThemeColor("Accent");
             titleBar.ButtonPressedForegroundColor = Colors.White;
-            titleBar.ButtonPressedBackgroundColor = GetThemeColor("Accent", "Dark2");
+            titleBar.ButtonPressedBackgroundColor = TitleHelper.GetThemeColor("Accent", "Dark2");
 
             // Set inactive window colors
             titleBar.InactiveForegroundColor = Colors.Gray;
