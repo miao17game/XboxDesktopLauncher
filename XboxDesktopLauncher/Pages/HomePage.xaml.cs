@@ -60,5 +60,8 @@ namespace XboxDesktopLauncher.Pages {
             LoadPackages();
         }
 
+        private void Image_Loaded(object sender, RoutedEventArgs e) {
+            Debug.WriteLine(e.GetType());
+        }
     }
 }
