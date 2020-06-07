@@ -10,16 +10,21 @@
     d:DesignWidth="400">
 
     <UserControl.Resources>
-        <Style x:Key="ContainerStyle" TargetType="Grid">
-            <Setter Property="Margin" Value="0" />
-            <Setter Property="Background" Value="{StaticResource BlackCatBackgroundBrush}" />
-        </Style>
-        <Style x:Key="ListItemStyle" TargetType="NavigationViewItem">
-            <Setter Property="Padding" Value="0,40,0,0" />
-            <Setter Property="Height" Value="120" />
-            <Setter Property="MaxHeight" Value="120" />
-            <Setter Property="VerticalAlignment" Value="Stretch" />
-        </Style>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Dictionaries/NavigateContainer.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <Style x:Key="ContainerStyle" TargetType="Grid">
+                <Setter Property="Margin" Value="0" />
+                <Setter Property="Background" Value="{StaticResource BlackCatBackgroundBrush}" />
+            </Style>
+            <Style x:Key="ListItemStyle" TargetType="NavigationViewItem">
+                <Setter Property="Padding" Value="0,40,0,0" />
+                <Setter Property="Height" Value="120" />
+                <Setter Property="MaxHeight" Value="120" />
+                <Setter Property="VerticalAlignment" Value="Stretch" />
+            </Style>
+        </ResourceDictionary>
     </UserControl.Resources>
 
     <Grid Style="{StaticResource ContainerStyle}">
@@ -30,8 +35,7 @@
             ItemInvoked="NavView_ItemInvoked"
             IsSettingsVisible="False"
             IsBackButtonVisible="Collapsed"
-            IsBackEnabled="False"
-            MenuItemContainerStyle="{StaticResource ListItemStyle}">
+            IsBackEnabled="False">
             <ScrollViewer>
                 <ContentPresenter Content="{x:Bind ContentFrame}" />
             </ScrollViewer>
@@ -44,6 +48,7 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="NavView.PaneDisplayMode" Value="Top" />
+                        <Setter Target="NavView.MenuItemContainerStyle" Value="{StaticResource ListItemStyle}" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>

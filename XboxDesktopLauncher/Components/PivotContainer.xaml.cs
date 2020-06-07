@@ -44,7 +44,13 @@ namespace XboxDesktopLauncher.Components {
         public static readonly DependencyProperty ContentFrameProperty =
             DependencyProperty.Register("ContentFrame", typeof(Frame), typeof(PivotContainer), null);
 
-        private void OnNavigated(object sender, NavigationEventArgs args) { }
+        private void OnNavigated(object sender, NavigationEventArgs args) {
+            Debug.WriteLine("navigated");
+        }
+
+        private void ListView_Loaded(object _, RoutedEventArgs e) {
+            ListContainer.SelectedIndex = 0;
+        }
 
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             var pre = Selected;

@@ -9,14 +9,14 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <!--<Components:PivotContainer>
+    <Components:PivotContainer>
         <Components:PivotContainer.ContentFrame>
             <Frame x:Name="content" Navigated="OnNavigated"/>
         </Components:PivotContainer.ContentFrame>
-    </Components:PivotContainer>-->
-    <Components:NavigateContainer>
+    </Components:PivotContainer>
+    <!--<Components:NavigateContainer>
         <Components:NavigateContainer.ContentFrame>
             <Frame x:Name="content" Navigated="OnNavigated"/>
         </Components:NavigateContainer.ContentFrame>
-    </Components:NavigateContainer>
+    </Components:NavigateContainer>-->
 </Page>

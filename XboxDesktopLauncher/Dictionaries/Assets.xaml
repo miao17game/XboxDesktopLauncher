@@ -4,7 +4,7 @@
 
     <ImageBrush 
         x:Key="BlackCatBackgroundBrush" 
-        ImageSource="ms-appx:///Assets/Backgrounds/BlackCat.png"
+        ImageSource="/Assets/Backgrounds/BlackCat.png"
         Stretch="UniformToFill"
     />
 
