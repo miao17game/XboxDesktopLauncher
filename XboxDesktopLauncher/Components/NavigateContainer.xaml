@@ -12,7 +12,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Dictionaries/NavigateContainer.xaml" />
+                <ResourceDictionary Source="/Styles/NavigateContainer.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <Style x:Key="ContainerStyle" TargetType="Grid">
                 <Setter Property="Margin" Value="0" />
