@@ -15,7 +15,6 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 using XboxDesktopLauncher.Utils;
-using muxc = Microsoft.UI.Xaml.Controls;
 
 namespace XboxDesktopLauncher.Components {
     public sealed partial class NavigateContainer : UserControl {
@@ -24,7 +23,7 @@ namespace XboxDesktopLauncher.Components {
 
         public RouteTag Selected;
 
-        public muxc.NavigationViewItemBase SelectedContainer;
+        public NavigationViewItemBase SelectedContainer;
 
         public Frame ContentFrame {
             get { return (Frame)GetValue(ContentFrameProperty); }
@@ -44,25 +43,25 @@ namespace XboxDesktopLauncher.Components {
         }
 
         public static readonly DependencyProperty ContentFrameProperty =
-            DependencyProperty.Register("ContentFrame", typeof(Frame), typeof(PivotContainer), null);
+            DependencyProperty.Register("ContentFrame", typeof(Frame), typeof(NavigateContainer), null);
 
         private void OnNavigated(object sender, NavigationEventArgs args) {
             Debug.WriteLine("navigated");
         }
 
         private void NavView_Loaded(object sender, RoutedEventArgs e) {
-            foreach(var tag in Tags) {
-                NavView.MenuItems.Add(new muxc.NavigationViewItem {
+            foreach (var tag in Tags) {
+                NavView.MenuItems.Add(new NavigationViewItem {
                     Content = tag.Text,
                     Icon = new SymbolIcon((Symbol)0xF1AD),
                     Tag = tag.Type
                 });
             }
             Selected = ApplicationRouter.GetRouteTag(Tags[0].Type);
-            SelectedContainer = (muxc.NavigationViewItemBase)(NavView.SelectedItem = NavView.MenuItems[0]);
+            SelectedContainer = (NavigationViewItemBase)(NavView.SelectedItem = NavView.MenuItems[0]);
         }
 
-        private void NavView_ItemInvoked(muxc.NavigationView _, muxc.NavigationViewItemInvokedEventArgs args) {
+        private void NavView_ItemInvoked(NavigationView _, NavigationViewItemInvokedEventArgs args) {
             var tag = (RouteType)args.InvokedItemContainer.Tag;
             var pre = Selected;
             Selected = ApplicationRouter.GetRouteTag(tag);

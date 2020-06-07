@@ -47,9 +47,9 @@
             ItemContainerStyle="{StaticResource ItemContainerStyle}"
             Style="{StaticResource ListViewStyle}"
             SelectionChanged="ListView_SelectionChanged"/>
-        <Grid Grid.Row="1">
+        <ScrollViewer Grid.Row="1">
             <ContentPresenter Content="{x:Bind ContentFrame}" />
-        </Grid>
+        </ScrollViewer>
     </Grid>
 
 </UserControl>

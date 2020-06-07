@@ -5,7 +5,6 @@
     xmlns:local="using:XboxDesktopLauncher.Components"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
@@ -15,42 +14,36 @@
             <Setter Property="Margin" Value="0" />
             <Setter Property="Background" Value="{StaticResource BlackCatBackgroundBrush}" />
         </Style>
-        <Style x:Key="ListViewStyle" TargetType="muxc:NavigationViewItem">
-            <!--<Setter Property="Padding" Value="0,40,0,0" />
-            <Setter Property="Height" Value="120" />-->
+        <Style x:Key="ListItemStyle" TargetType="NavigationViewItem">
+            <Setter Property="Padding" Value="0,40,0,0" />
+            <Setter Property="Height" Value="120" />
+            <Setter Property="MaxHeight" Value="120" />
             <Setter Property="VerticalAlignment" Value="Stretch" />
-            <Setter Property="Background" Value="{ThemeResource SystemControlBaseHighAcrylicElementMediumBrush}" />
         </Style>
     </UserControl.Resources>
 
     <Grid Style="{StaticResource ContainerStyle}">
-        <muxc:NavigationView
+        <NavigationView
+            Style="{StaticResource NavigateContainerStyle}"
             x:Name="NavView"
             Loaded="NavView_Loaded"
             ItemInvoked="NavView_ItemInvoked"
             IsSettingsVisible="False"
             IsBackButtonVisible="Collapsed"
             IsBackEnabled="False"
-            MenuItemContainerStyle="{StaticResource ListViewStyle}">
+            MenuItemContainerStyle="{StaticResource ListItemStyle}">
             <ScrollViewer>
                 <ContentPresenter Content="{x:Bind ContentFrame}" />
             </ScrollViewer>
-        </muxc:NavigationView>
-
+        </NavigationView>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
                 <VisualState>
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger
-                        MinWindowWidth="{x:Bind NavView.CompactModeThresholdWidth}"/>
+                        <AdaptiveTrigger MinWindowWidth="{x:Bind NavView.CompactModeThresholdWidth}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <!-- Remove the next 3 lines for left-only navigation. -->
-                        <Setter Target="NavView.PaneDisplayMode" Value="Top"/>
-                        <!--<Setter Target="NavViewSearchBox.Width" Value="200"/>
-                        <Setter Target="MainPagesHeader.Visibility" Value="Collapsed"/>-->
-                        <!-- Leave the next line for left-only navigation. -->
-                        <!--<Setter Target="ContentFrame.Padding" Value="24,0,24,24"/>-->
+                        <Setter Target="NavView.PaneDisplayMode" Value="Top" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
