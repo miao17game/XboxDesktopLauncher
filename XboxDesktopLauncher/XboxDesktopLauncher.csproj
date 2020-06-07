@@ -138,6 +138,7 @@
     <Compile Include="Utils\ApplicationRouter.cs" />
     <Compile Include="Utils\TitleBarHelper.cs" />
     <Compile Include="Utils\TransitionHelper.cs" />
+    <Compile Include="Utils\UI.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

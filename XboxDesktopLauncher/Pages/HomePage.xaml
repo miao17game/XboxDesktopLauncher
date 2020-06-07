@@ -9,6 +9,21 @@
     Background="Transparent">
 
     <Grid>
-        <TextBlock FontSize="68">Home</TextBlock>
+        <ListView x:Name="PackageList" ItemsSource="{x:Bind Packages, Mode=OneWay}" Loaded="PackageList_Loaded">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="local:WinPackage">
+                    <Grid Height="100" VerticalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Image Width="32" Height="32" Source="{x:Bind Logo}" Stretch="UniformToFill"/>
+                        </Border>
+                        <TextBlock Grid.Column="1" Text="{x:Bind Name}" VerticalAlignment="Center"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Page>
