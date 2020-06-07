@@ -5,11 +5,13 @@
     xmlns:local="using:XboxDesktopLauncher.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     mc:Ignorable="d"
     Background="Transparent">
 
     <Grid>
-        <ListView x:Name="PackageList" ItemsSource="{x:Bind Packages, Mode=OneWay}" Loaded="PackageList_Loaded">
+        <muxc:ProgressRing IsActive="True" />
+        <ListView x:Name="PackageList" ItemsSource="{x:Bind Packages, Mode=OneWay}">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="local:WinPackage">
                     <Grid Height="100" VerticalAlignment="Center">
@@ -18,7 +20,13 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <Border Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <Image Width="32" Height="32" Source="{x:Bind Logo}" Stretch="UniformToFill" Loaded="Image_Loaded"/>
+                            <Image
+                                Width="32"
+                                Height="32"
+                                Source="{x:Bind Logo}"
+                                Stretch="UniformToFill"
+                                ImageOpened="Image_ImageOpened"
+                                ImageFailed="Image_ImageFailed"/>
                         </Border>
                         <TextBlock Grid.Column="1" Text="{x:Bind Name}" VerticalAlignment="Center"/>
                     </Grid>

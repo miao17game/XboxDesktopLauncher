@@ -74,9 +74,7 @@ namespace XboxDesktopLauncher.Utils {
             }
             if (context.Current == tag) return false;
             context.Current = tag;
-            return frame.NavigateToType(GetRoute(tag), null, new FrameNavigationOptions {
-                TransitionInfoOverride = transition ?? TransitionHelper.DefaultSlide
-            });
+            return frame.Navigate(GetRoute(tag), null, transition ?? TransitionHelper.DefaultSlide);
         }
 
     }

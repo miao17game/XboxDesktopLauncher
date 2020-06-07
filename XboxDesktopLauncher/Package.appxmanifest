@@ -46,6 +46,11 @@
 
 	<Capabilities>
 		<rescap:Capability Name="packageQuery" />
+		<rescap:Capability Name="broadFileSystemAccess" />
 		<Capability Name="internetClient" />
+		<uap:Capability Name="videosLibrary"/>
+		<uap:Capability Name="picturesLibrary"/>
+		<uap:Capability Name="musicLibrary"/>
+		<uap:Capability Name="removableStorage"/>
 	</Capabilities>
 </Package>

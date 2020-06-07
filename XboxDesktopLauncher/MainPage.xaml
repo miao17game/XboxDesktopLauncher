@@ -6,17 +6,25 @@
     xmlns:local="using:XboxDesktopLauncher"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Components:PivotContainer>
-        <Components:PivotContainer.ContentFrame>
-            <Frame x:Name="content" Navigated="OnNavigated"/>
-        </Components:PivotContainer.ContentFrame>
-    </Components:PivotContainer>
-    <!--<Components:NavigateContainer>
-        <Components:NavigateContainer.ContentFrame>
-            <Frame x:Name="content" Navigated="OnNavigated"/>
-        </Components:NavigateContainer.ContentFrame>
-    </Components:NavigateContainer>-->
+    <Grid>
+        <Components:PivotContainer>
+            <Components:PivotContainer.ContentFrame>
+                <Frame x:Name="content" Navigated="OnNavigated"/>
+            </Components:PivotContainer.ContentFrame>
+        </Components:PivotContainer>
+        <!--<Components:NavigateContainer>
+            <Components:NavigateContainer.ContentFrame>
+                <Frame x:Name="content" Navigated="OnNavigated"/>
+            </Components:NavigateContainer.ContentFrame>
+        </Components:NavigateContainer>-->
+        <muxc:TeachingTip
+            x:Name="GlobalTip"
+            IsOpen="False"
+            PreferredPlacement="Bottom"
+            PlacementMargin="10" />
+    </Grid>
 </Page>
